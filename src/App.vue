@@ -1,28 +1,64 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header/>
+    <Vitrina/>
+    
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header'
+import Vitrina from './components/Vitrina.vue'
+
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+   Header,
+  Vitrina
+  },
+  mounted() {
+    ( 
+				async () => {
+					"use strict";
+					
+
+					 function getData() {
+
+					    return new Promise(function (resolve, reject) {
+					    	const url = "https://krapipl.imumk.ru:8443/api/mobilev1/update";
+					        const xhr = new XMLHttpRequest();
+
+					        xhr.open('POST', url, true);
+
+							
+
+					        xhr.onload = function () {
+					            const status = xhr.status;
+
+					            if ( status == 200 ) {
+					                resolve(xhr.response);
+					            } else {
+					                reject(status);
+					            }
+					        };
+
+							/* xnr.responseType = 'JSON' */
+
+					        xhr.send();
+					    });
+					}
+
+					const data = await getData();
+					console.log(data);
+				}
+			) ()
+}
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
