@@ -20,41 +20,26 @@ export default {
   Vitrina
   },
   mounted() {
-    ( 
-				async () => {
-					"use strict";
-					
+     
+			 const XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+        const xhr = new XHR();
+        
+        xhr.open('POST', 'https://krapipl.imumk.ru:8443/api/mobilev1/update', true);
 
-					 function getData() {
+        xhr.onerror = function() {
+            console.log('Ошибка ' + this.status);
+        }
 
-					    return new Promise(function (resolve, reject) {
-					    	const url = "https://krapipl.imumk.ru:8443/api/mobilev1/update";
-					        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            
+              const data =JSON.parse(this.responseText);
 
-					        xhr.open('POST', url, true);
+              console.log(data);
+        }
 
-							
+       
 
-					        xhr.onload = function () {
-					            const status = xhr.status;
-
-					            if ( status == 200 ) {
-					                resolve(xhr.response);
-					            } else {
-					                reject(status);
-					            }
-					        };
-
-							/* xnr.responseType = 'JSON' */
-
-					        xhr.send();
-					    });
-					}
-
-					const data = await getData();
-					console.log(data);
-				}
-			) ()
+        xhr.send();
 }
 }
 </script>

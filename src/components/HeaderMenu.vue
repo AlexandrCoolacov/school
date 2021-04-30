@@ -106,12 +106,12 @@ export default {
 }
 
     .headerMenuList {
-        position: relative;
+
         display: grid;
         
-        // text-align: center;
-        // align-items: center;
-        // justify-content: center;
+        transition-duration: 1s;
+        position: relative;
+         overflow: hidden;
         max-width: 130px;
         max-height: 200px;
         border: 1.75px;
@@ -125,9 +125,12 @@ export default {
         
 
             ul {
+                display: grid;
+                position: relative;
                 
                 text-align: start;
-               /*  position: relative; */
+               transition-duration: 1s;
+            transition-delay: 1s;
                 
                 padding: 0px;
                 white-space: nowrap;
@@ -162,8 +165,21 @@ export default {
 }
 
 .active {
+        display: grid;
+        position: relative;
         opacity: 0; 
-        width: 0; 
+        transform: translate(-150px,0px);
+        transition-duration: 1s;
+        
+        width: 100%; 
+        z-index: -1;
+        overflow: hidden;
+        ul{
+            transition-duration: 1s;
+            transition-delay: 1s;
+            transform: translate(0px,-200px);
+        }
+        
     }
 
 @media (max-width:475px) {
